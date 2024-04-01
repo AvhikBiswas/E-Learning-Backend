@@ -1,7 +1,7 @@
 import Course from "../repository/course";
 import { CourseFilter, PaginationOptions } from "../types/Course";
 
-const getProfileData = async (
+const filterCourse = async (
   filterData: CourseFilter,
   paginationData: PaginationOptions
 ) => {
@@ -18,4 +18,4 @@ const getProfileData = async (
   }
 };
 
-export default getProfileData;
+export default filterCourse;

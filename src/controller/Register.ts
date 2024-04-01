@@ -4,18 +4,27 @@ import UserRegister from "../service/UserRegister";
 
 const registerUser = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, profilePicture } = req.body;
     if (!name || !email || !password) {
       throw new Error("Name, email, and password are required fields");
     }
-    const userData: UserPayload = req.body;
 
-    const newUser = await UserRegister(userData);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!emailRegex.test(userData.email)) {
+    if (!passwordRegex.test(password)) {
+      throw new Error("Chose A Strong Password");
+    }
+
+    const emailRegex = /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/;
+    if (!emailRegex.test(email)) {
       throw new Error("Invalid email format");
     }
+
+    const userData: UserPayload = { name, email, password, profilePicture };
+
+    const newUser = await UserRegister(userData);
+
     if (!newUser) {
       throw new Error("User Alredy Exist");
     }

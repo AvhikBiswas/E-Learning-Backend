@@ -16,11 +16,32 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(cuid())
-  email          String   @unique
+  id             String       @id @default(cuid())
+  email          String       @unique
   name           String
   password       String
   profilePicture String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  courses        Course[]     @relation("UserCourse")
+  enrollments    Enrollment[]
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  title       String
+  category    String
+  level       String
+  popularity  Int
+  users       User[]       @relation("UserCourse")
+  enrollments Enrollment[]
+}
+
+model Enrollment {
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId String
+
+  @@id([userId, courseId])
 }

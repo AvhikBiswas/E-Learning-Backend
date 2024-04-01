@@ -1,2 +1,29 @@
 /node_modules
 /dist
+
+# TypeScript build output
+*.js
+*.map
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-workspace
+*.sublime-project
+
+# Environment variables file
+.env
+
+# Logs
+logs
+*.log
+
+# Package lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# OS generated files
+.DS_Store
+Thumbs.db

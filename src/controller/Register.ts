@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { UserPayload } from "../types/User";
 import UserRegister from "../service/UserRegister";
 
-const registerUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const registerUser = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {

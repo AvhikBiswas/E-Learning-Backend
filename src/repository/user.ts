@@ -1,13 +1,15 @@
 import { prismaClient } from "../db";
+import { hashPassword } from "../helper/encryption";
 import { UserPayload, userUpdatePayload } from "../types/User";
 
 class User {
   async createUser(userData: UserPayload) {
     try {
+      const hashPass = await hashPassword(userData.password);
       const newUser = await prismaClient.user.create({
         data: {
           name: userData.name,
-          password: userData.password,
+          password: hashPass,
           profilePicture: userData?.profilePicture,
           email: userData.email,
         },
@@ -56,6 +58,11 @@ class User {
   }
 
   async updateUser(uerUpdate: userUpdatePayload) {
+    if (uerUpdate.newPassword) {
+      const hashPass = await hashPassword(uerUpdate.newPassword);
+      uerUpdate.newPassword = hashPass;
+    }
+
     try {
       const updatedUser = await prismaClient.user.update({
         where: { id: uerUpdate.id },

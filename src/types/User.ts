@@ -4,6 +4,10 @@ export interface UserPayload {
   password: string;
   profilePicture?: string;
 }
+export interface LoginPayload {
+  password: string;
+  email: string;
+}
 
 export interface userUpdatePayload {
   id: string;

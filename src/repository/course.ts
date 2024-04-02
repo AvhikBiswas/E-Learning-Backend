@@ -1,5 +1,10 @@
 import { prismaClient } from "../db";
-import { CourseFilter, CoursePayload, CourseUpdatePayload, PaginationOptions } from "../types/Course";
+import {
+  CourseFilter,
+  CoursePayload,
+  CourseUpdatePayload,
+  PaginationOptions,
+} from "../types/Course";
 
 class Course {
   async createCourse(courseData: CoursePayload) {
@@ -29,27 +34,18 @@ class Course {
     }
   }
 
-  async findAllCourse(page: number, pageSize: number) {
-    try {
-      const data = await prismaClient.course.findMany({
-        skip: (page - 1) * pageSize,
-        take: pageSize, 
-      });
-      return data;
-    } catch (error) {
-      return error;
-    }
-  }
-  async findAllCoursesFilter(filters: CourseFilter, paginationOptions: PaginationOptions) {
+  async findAllCoursesFilter(
+    filters: CourseFilter,
+    paginationOptions: PaginationOptions
+  ) {
     try {
       const courses = await prismaClient.course.findMany({
         where: {
           category: filters?.category,
           level: filters?.level,
+          popularity: filters?.popularity,
         },
-        orderBy: {
-          popularity: filters?.popularity || 'desc',
-        },
+        
         skip: paginationOptions.skip || 0,
         take: paginationOptions.take || 10,
       });

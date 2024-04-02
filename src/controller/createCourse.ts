@@ -3,9 +3,15 @@ import createCourseService from "../service/createCourse";
 import { CoursePayload } from "../types/Course";
 
 const createCourse = async (req: Request, res: Response) => {
-  const courseData:CoursePayload = req.body;
-  
-  if (!courseData.title || !courseData.category || !courseData.level || !courseData.popularity) {
+  const courseData: CoursePayload = req.body;
+
+  console.log("req.body", req.body);
+  if (
+    !courseData.title ||
+    !courseData.category ||
+    !courseData.level ||
+    !courseData.popularity
+  ) {
     return res.status(400).json({
       success: false,
       message: "Missing required fields",

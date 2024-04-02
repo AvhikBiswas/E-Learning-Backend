@@ -10,7 +10,7 @@ const router: Router = express.Router();
 router.post("/register", registerUser);
 router.get("/profile", getProfile);
 router.put("/profile", updateUser);
-router.get("/courses", filterCourses);
+router.get("/course", filterCourses);
 router.post("/course", createCourse);
 
 export default router;

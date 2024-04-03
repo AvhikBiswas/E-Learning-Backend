@@ -16,3 +16,10 @@ export interface userUpdatePayload {
   newPassword?: string;
   newProfilePicture?: string;
 }
+
+export interface UserType {
+  id: string;
+  email: string;
+  name: string;
+  profilePicture?: string;
+}

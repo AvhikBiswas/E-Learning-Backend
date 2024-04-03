@@ -5,8 +5,8 @@ export interface RequestWithUser extends Request {
   user?: JwtPayload;
 }
 
-export interface User {
-  id: number;
-  username: string;
-  role: string;
-}
+export type JwtUserPayload = {
+  id: string;
+  email: string;
+  userType: string;
+};

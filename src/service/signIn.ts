@@ -1,20 +1,30 @@
+import { generateAccessToken } from "../auth/jwt";
 import { comparePasswords } from "../helper/encryption";
 import User from "../repository/user";
-import { LoginPayload, UserPayload } from "../types/User";
+import { JwtUserPayload } from "../types/auth";
+import { LoginPayload, UserPayload, UserType } from "../types/User";
 
 const signIn = async (loginData: LoginPayload) => {
   const userRepository = new User();
 
   try {
     const userData: any = await userRepository.findUserByEmail(loginData.email);
-    if (!userData) {
-      return false;
+    if (!userData) return -1;
+    if (userData) {
+      const isPassCorrect = await comparePasswords(
+        loginData.password,
+        userData.password
+      );
+      if (isPassCorrect) {
+        const accessToken = generateAccessToken({
+          id: userData.id,
+          email: userData.email,
+          userType: "student",
+        });
+        return accessToken;
+      }
     }
-    const isPassCorrect = await comparePasswords(
-      loginData.password,
-      userData.password
-    );
-    return isPassCorrect;
+    return false;
   } catch (error) {
     return error;
   }

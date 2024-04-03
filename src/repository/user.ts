@@ -58,18 +58,22 @@ class User {
   }
 
   async updateUser(uerUpdate: userUpdatePayload) {
-    if (uerUpdate.newPassword) {
-      const hashPass = await hashPassword(uerUpdate.newPassword);
-      uerUpdate.newPassword = hashPass;
-    }
-
     try {
+      if (uerUpdate.newPassword) {
+        const hasPass = await hashPassword(uerUpdate.newPassword);
+        const updatedUser = await prismaClient.user.update({
+          where: { id: uerUpdate.id },
+          data: {
+            password: hasPass,
+          },
+        });
+      }
       const updatedUser = await prismaClient.user.update({
         where: { id: uerUpdate.id },
         data: {
           name: uerUpdate?.newName,
           email: uerUpdate?.newEmail,
-          profilePicture: uerUpdate?.newPassword,
+          profilePicture: uerUpdate?.newProfilePicture,
         },
       });
       return updatedUser;

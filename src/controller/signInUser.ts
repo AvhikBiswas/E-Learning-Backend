@@ -14,14 +14,17 @@ const signInUser = async (req: Request, res: Response) => {
       });
     }
 
-    const isSigninSucc = await signIn({ email, password });
-    if (!isSigninSucc) {
+    const isSigninSuccData = await signIn({ email, password });
+    if (isSigninSuccData == -1) {
+      throw new Error("Please Check Your Mail Id");
+    }
+    if (!isSigninSuccData) {
       throw new Error("Pls provide Correct Credential");
     }
     return res.status(200).json({
       success: true,
       message: "Successfully user Login",
-      data: {},
+      data: { token: isSigninSuccData },
       err: {},
     });
   } catch (error: any) {

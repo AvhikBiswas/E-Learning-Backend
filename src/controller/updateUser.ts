@@ -4,11 +4,8 @@ import { userUpdatePayload } from "../types/User";
 
 const updateUser = async (req: Request, res: Response) => {
   try {
-    const { id, newEmail, newName, newPassword, newProfilePicture } =
-      req.body;
+    const { id, newEmail, newName, newPassword, newProfilePicture } = req.body;
 
-
-      console.log('req.params',req.body )
     if (!id) {
       throw new Error("id is required fields");
     }

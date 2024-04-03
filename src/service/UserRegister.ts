@@ -1,3 +1,4 @@
+import { generateAccessToken } from "../auth/jwt";
 import User from "../repository/user";
 import { UserPayload } from "../types/User";
 
@@ -9,8 +10,10 @@ const UserRegister = async (userData: UserPayload) => {
     if (existingUser) {
       return;
     }
-    const newUserData = await userRepository.createUser(userData);
-    return newUserData;
+    const newUserData:any = await userRepository.createUser(userData);
+    if(newUserData){
+      return generateAccessToken({id:newUserData.id,email:newUserData.email,userType:"student"});
+    }
   } catch (error) {
     return error;
   }

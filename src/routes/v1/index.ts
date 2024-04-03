@@ -6,16 +6,22 @@ import filterCourses from "../../controller/filterCourses";
 import createCourse from "../../controller/createCourse";
 import signInUser from "../../controller/signInUser";
 import { isAuthenticated } from "../../middleware/authMiddleware";
+import updateCourseController from "../../controller/updateCourse";
+import deleteCourseController from "../../controller/deleteCourseController";
 
 const router: Router = express.Router();
 
+router.post("/admin/course", createCourse);
+router.put("/admin/update", updateCourseController);
+router.get("/admin/course", isAuthenticated, filterCourses);
+router.delete("/admin/course/:courseId", deleteCourseController);
 
 
+router.post("/signin", signInUser);
 router.post("/register", registerUser);
 router.get("/profile", isAuthenticated, getProfile);
 router.put("/profile", isAuthenticated, updateUser);
 router.get("/course", isAuthenticated, filterCourses);
-router.post("/course", isAuthenticated, createCourse);
-router.post("/signin", signInUser);
+
 
 export default router;

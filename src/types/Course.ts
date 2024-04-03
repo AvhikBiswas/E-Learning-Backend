@@ -13,6 +13,9 @@ export interface CourseUpdatePayload {
   newPopularity?: PopularityType;
 }
 
+
+
+
 export interface CourseFilter {
   category?: CategoryType;
   level?: string;

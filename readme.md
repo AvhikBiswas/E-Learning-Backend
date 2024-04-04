@@ -87,6 +87,17 @@ Copy code
 ],
 "totalCourses": 20
 }
+
+admin password and details is {
+    "adminName": "Avik Biswas",
+    "adminEmail": "abhikbiswas351@gmail.com",
+    "adminPassWord": "123456"
+}
+
+it's stored in db only admin can create new admin and we can follow another approch that we can heardcode admin id and pasword for mor detaild operatin this architecture im following
+
+
+
 CRUD Operations for Superadmin
 Endpoint: POST /api/courses
 Endpoint: GET /api/courses/:id

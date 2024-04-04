@@ -8,6 +8,7 @@ import signInUser from "../../controller/signInUser";
 import { isAuthenticated } from "../../middleware/authMiddleware";
 import updateCourseController from "../../controller/updateCourse";
 import deleteCourseController from "../../controller/deleteCourseController";
+import createAdmin from "../../controller/createAdmin";
 
 const router: Router = express.Router();
 
@@ -15,6 +16,7 @@ router.post("/admin/course", createCourse);
 router.put("/admin/update", updateCourseController);
 router.get("/admin/course", isAuthenticated, filterCourses);
 router.delete("/admin/course/:courseId", deleteCourseController);
+router.post("/admin/createAdmin",createAdmin);
 
 
 router.post("/signin", signInUser);

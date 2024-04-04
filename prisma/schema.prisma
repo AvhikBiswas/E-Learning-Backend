@@ -58,3 +58,10 @@ enum Popularity {
   MEDIUM
   HIGH
 }
+
+model Admin {
+  id String @id @default(cuid())
+  adminName String
+  adminPassWord String
+  adminEmail String
+}

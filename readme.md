@@ -1,178 +1,112 @@
-User APIs
-User Registration
-Endpoint: POST /api/register
+API Documentation
+Description
+This API provides endpoints for user and admin operations related to course management, user enrollment, profile management, authentication, and image uploading.
 
-Allows users to register by providing necessary details such as name, email, and password.
+Endpoints
+User Endpoints
+Register User
 
-Request Body
-json
-Copy code
-{
-"name": "John Doe",
-"email": "john@example.com",
-"password": "securepassword"
-}
-Response (Success)
-json
-Copy code
-{
-"message": "User registered successfully"
-}
-Response (Error)
-json
-Copy code
-{
-"error": "Email already exists"
-}
-User Profile
-Endpoint: GET /api/profile
-Endpoint: PUT /api/profile
+Method: POST
+Endpoint: /register
+Description: Registers a new user.
+Request Body: JSON containing user details (email, name, password).
+Auth Required: No
+Sign In User
 
-Enables users to view and update their profile information, including name, email, profile picture, and any other relevant details.
+Method: POST
+Endpoint: /signin
+Description: Authenticates a user.
+Request Body: JSON containing user credentials (email, password).
+Auth Required: No
+Get User Profile
 
-Request (GET)
-http
-Copy code
-GET /api/profile
-Response (Success)
-json
-Copy code
-{
-"name": "John Doe",
-"email": "john@example.com",
-"profilePicture": "https://example.com/profile.jpg",
-// Other profile details
-}
-Request (PUT)
-http
-Copy code
-PUT /api/profile
-json
-Copy code
-{
-"name": "Jane Doe",
-// Other fields to update
-}
-Response (Success)
-json
-Copy code
-{
-"message": "Profile updated successfully"
-}
-Course APIs
-Get Courses
-Endpoint: GET /api/courses
+Method: GET
+Endpoint: /profile
+Description: Retrieves the profile of the authenticated user.
+Auth Required: Yes
+Update User Profile
 
-Provides an API endpoint to fetch courses available on the platform. Implement filtering options based on parameters such as category, level, popularity, etc. Enable pagination to handle large datasets efficiently.
+Method: PUT
+Endpoint: /profile
+Description: Updates the profile of the authenticated user.
+Request Body: JSON containing user details to be updated (name, password, profilePicture).
+Auth Required: Yes
+Filter Courses
 
-Request (GET)
-http
-Copy code
-GET /api/courses?category=programming&level=beginner&page=1&limit=10
-Response (Success)
-json
-Copy code
-{
-"courses": [
-{
-"id": 1,
-"title": "Introduction to Programming",
-// Other course details
-},
-{
-"id": 2,
-"title": "Web Development Basics",
-// Other course details
-}
-],
-"totalCourses": 20
-}
+Method: GET
+Endpoint: /course
+Description: Retrieves courses based on filtering criteria.
+Query Parameters: category, level
+Auth Required: Yes
+Enroll in Course
 
-admin password and details is {
-    "adminName": "Avik Biswas",
-    "adminEmail": "abhikbiswas351@gmail.com",
-    "adminPassWord": "123456"
-}
+Method: POST
+Endpoint: /enroll/:courseId
+Description: Enrolls the authenticated user in the specified course.
+Path Parameters: courseId
+Auth Required: Yes
+Get Enrolled Courses
 
-it's stored in db only admin can create new admin and we can follow another approch that we can heardcode admin id and pasword for mor detaild operatin this architecture im following
+Method: GET
+Endpoint: /enroll
+Description: Retrieves courses in which the authenticated user is enrolled.
+Auth Required: Yes
+Upload Profile Picture
 
+Method: POST
+Endpoint: /image
+Description: Uploads a profile picture for the authenticated user.
+Request Body: Form data containing the image file.
+Auth Required: Yes
+Admin Endpoints
+Create Course
 
+Method: POST
+Endpoint: /admin/course
+Description: Creates a new course.
+Request Body: JSON containing course details (title, category, level, popularity).
+Auth Required: Yes (Admin)
+Update Course
 
-CRUD Operations for Superadmin
-Endpoint: POST /api/courses
-Endpoint: GET /api/courses/:id
-Endpoint: PUT /api/courses/:id
-Endpoint: DELETE /api/courses/:id
+Method: PUT
+Endpoint: /admin/update
+Description: Updates an existing course.
+Request Body: JSON containing updated course details.
+Auth Required: Yes (Admin)
+Get Admin Courses
 
-Implement Create, Read, Update, and Delete operations for courses. Only superadmin users should have permission to perform these operations.
+Method: GET
+Endpoint: /admin/course
+Description: Retrieves all courses created by the admin.
+Auth Required: Yes (Admin)
+Delete Course
 
-User Enrollment APIs
-Course Enrollment
-Endpoint: POST /api/enrollments
+Method: DELETE
+Endpoint: /admin/course/:courseId
+Description: Deletes the specified course.
+Path Parameters: courseId
+Auth Required: Yes (Admin)
+Create Admin
 
-Allow users to enroll in courses they are interested in. Implement validation to ensure users can't enroll in the same course multiple times.
+Method: POST
+Endpoint: /admin/createAdmin
+Description: Creates a new admin user.
+Request Body: JSON containing admin details (adminName, adminPassword, adminEmail).
+Auth Required: Yes (Admin)
+Sign In Admin
 
-Request Body
-json
-Copy code
-{
-"userId": 1,
-"courseId": 1
-}
-Response (Success)
-json
-Copy code
-{
-"message": "Enrollment successful"
-}
-Response (Error)
-json
-Copy code
-{
-"error": "User is already enrolled in this course"
-}
-View Enrolled Courses
-Endpoint: GET /api/enrollments/:userId/courses
+Method: POST
+Endpoint: /admin/signin
+Description: Authenticates an admin user.
+Request Body: JSON containing admin credentials (adminEmail, adminPassword).
+Auth Required: No
+Expected Output
+For successful requests, the API returns appropriate HTTP status codes along with the requested data in JSON format.
+For errors or failures, the API returns relevant HTTP status codes along with error messages in JSON format.
+Notes
+Authentication middleware (isAdminAuthed, isUserAuthed) is used to secure certain endpoints.
+Multer middleware (upload) is used for handling file uploads.
+The API interacts with a database (PostgreSQL) using Prisma ORM.
+Ensure proper authentication and authorization mechanisms are implemented in the client application to access the protected endpoints.
 
-Provide an API endpoint for users to view the courses they have enrolled in.
-
-Request (GET)
-http
-Copy code
-GET /api/enrollments/1/courses
-Response (Success)
-json
-Copy code
-{
-"courses": [
-{
-"id": 1,
-"title": "Introduction to Programming",
-// Other course details
-},
-{
-"id": 2,
-"title": "Web Development Basics",
-// Other course details
-}
-]
-}
-Filters and Pagination
-Filtering Options
-Implement filtering options for the courses API to enable users to refine their search based on criteria such as category, level, etc.
-
-Pagination
-Enable pagination to limit the number of results returned per request and improve performance when dealing with large datasets.
-
-Database and Email Integration
-Database
-Utilize the free tier of neon.tech database for storing user information, course details, and enrollment data.
-
-Email Integration
-Integrate with resend.com's free tier for handling email communications, such as user registration confirmation, password reset requests, and course enrollment notifications.
-
-Security and Authentication
-Implement secure authentication mechanisms, such as JWT (JSON Web Tokens), to authenticate users for accessing protected endpoints. Ensure sensitive data, such as passwords, is securely hashed before storage in the database.
-
-Error Handling and Logging
-Implement robust error handling mechanisms to provide meaningful error messages to clients. Utilize logging to track API requests, responses, and any potential errors or exceptions for debugging purposes.
+default Admin password is there in db.

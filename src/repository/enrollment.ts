@@ -18,6 +18,7 @@ class Enrollment {
   }
 
   async userAlreadyEnrolled(enrollmentData: enrollementPayload) {
+    console.log('enrollmentData', enrollmentData)
     try {
       const enrollData = await prismaClient.enrollment.findUnique({
         where: {

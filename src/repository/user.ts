@@ -11,7 +11,7 @@ class User {
           name: userData.name,
           password: hashPass,
           profilePicture: userData?.profilePicture,
-          email: userData.email,
+          email: userData.email.toLowerCase(),
         },
       });
 
@@ -72,7 +72,7 @@ class User {
         where: { id: uerUpdate.id },
         data: {
           name: uerUpdate?.newName,
-          email: uerUpdate?.newEmail,
+          email: uerUpdate?.newEmail?.toLowerCase(),
           profilePicture: uerUpdate?.newProfilePicture,
         },
       });

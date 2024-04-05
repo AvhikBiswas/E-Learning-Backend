@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import getProfileData from "../service/getProfileData";
 
-const getProfile = async (req: Request, res: Response) => {
+const getProfile = async (req: any, res: Response) => {
   try {
-    const { email } = req.query;
+    const  email = req.user.email;
+    email.toLowerCase();
     if (!email) {
       throw new Error("Email is required fields");
     }

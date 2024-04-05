@@ -9,7 +9,7 @@ class Admin {
       const newAdmin = await prismaClient.admin.create({
         data: {
           adminName: newAdminData.adminName,
-          adminEmail: newAdminData.adminEmail,
+          adminEmail: newAdminData.adminEmail.toLowerCase(),
           adminPassWord: hashPass,
         },
       });
@@ -25,7 +25,7 @@ class Admin {
     try {
       const adminData = await prismaClient.admin.findFirst({
         where: {
-          adminEmail: email,
+          adminEmail: email.toLowerCase(),
         },
       });
       return adminData;

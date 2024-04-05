@@ -21,6 +21,19 @@ class Admin {
     }
   }
 
+  async findAdmin(email: string) {
+    try {
+      const adminData = await prismaClient.admin.findFirst({
+        where: {
+          adminEmail: email,
+        },
+      });
+      return adminData;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async deleteAdmin(adminId: string) {
     try {
       const deleteData = await prismaClient.admin.delete({

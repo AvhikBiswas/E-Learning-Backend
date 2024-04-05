@@ -3,3 +3,7 @@ export interface adminType {
   adminPassWord: string;
   adminEmail: string;
 }
+export interface adminJwt{
+  id:string
+  userType:string
+}

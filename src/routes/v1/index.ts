@@ -5,25 +5,30 @@ import updateUser from "../../controller/updateUser";
 import filterCourses from "../../controller/filterCourses";
 import createCourse from "../../controller/createCourse";
 import signInUser from "../../controller/signInUser";
-import { isAuthenticated } from "../../middleware/authMiddleware";
 import updateCourseController from "../../controller/updateCourse";
 import deleteCourseController from "../../controller/deleteCourseController";
 import createAdmin from "../../controller/createAdmin";
+import { isAdminAuthed } from "../../middleware/adminAuth";
+import { isUserAuthed } from "../../middleware/userAuth";
+import signInAdmin from "../../controller/adminLogin";
+import { imageUploadController } from "../../controller/userImage";
+import upload from "../../middleware/multerUserImage";
 
 const router: Router = express.Router();
 
-router.post("/admin/course", createCourse);
-router.put("/admin/update", updateCourseController);
-router.get("/admin/course", isAuthenticated, filterCourses);
-router.delete("/admin/course/:courseId", deleteCourseController);
-router.post("/admin/createAdmin",createAdmin);
-
+router.post("/admin/course", isAdminAuthed, createCourse);
+router.put("/admin/update", isAdminAuthed, updateCourseController);
+router.get("/admin/course", isAdminAuthed, filterCourses);
+router.delete("/admin/course/:courseId", isAdminAuthed, deleteCourseController);
+router.post("/admin/createAdmin", isAdminAuthed, createAdmin);
+router.post("/admin/signin", signInAdmin);
 
 router.post("/signin", signInUser);
 router.post("/register", registerUser);
-router.get("/profile", isAuthenticated, getProfile);
-router.put("/profile", isAuthenticated, updateUser);
-router.get("/course", isAuthenticated, filterCourses);
+router.get("/profile", isUserAuthed, getProfile);
+router.put("/profile", isUserAuthed, updateUser);
+router.get("/course", isUserAuthed, filterCourses);
+router.post("/image",isUserAuthed,upload.single('image'),imageUploadController);
 
 
 export default router;

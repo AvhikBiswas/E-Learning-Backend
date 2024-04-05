@@ -1,4 +1,4 @@
-import { generateAccessToken } from "../auth/jwt";
+import {  generateUserAccessToken } from "../auth/jwt";
 import { comparePasswords } from "../helper/encryption";
 import User from "../repository/user";
 import { JwtUserPayload } from "../types/auth";
@@ -16,7 +16,7 @@ const signIn = async (loginData: LoginPayload) => {
         userData.password
       );
       if (isPassCorrect) {
-        const accessToken = generateAccessToken({
+        const accessToken = generateUserAccessToken({
           id: userData.id,
           email: userData.email,
           userType: "student",

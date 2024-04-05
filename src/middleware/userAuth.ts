@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { RequestWithUser } from "../types/auth";
 
-export function isAuthenticated(
+export function isUserAuthed(
   req: RequestWithUser,
   res: Response,
   next: NextFunction

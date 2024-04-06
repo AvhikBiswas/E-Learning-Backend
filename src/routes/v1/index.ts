@@ -15,6 +15,8 @@ import { imageUploadController } from "../../controller/userImage";
 import upload from "../../middleware/multerUserImage";
 import { enrollCourseController } from "../../controller/enrolleController";
 import userCoursesController from "../../controller/userCourses";
+import resetuserController from "../../controller/resetPasswordController";
+import { resetPasswordController } from "../../controller/verfyUserOtpController";
 
 const router: Router = express.Router();
 
@@ -31,7 +33,9 @@ router.get("/profile", isUserAuthed, getProfile);
 router.put("/profile", isUserAuthed, updateUser);
 router.get("/course", isUserAuthed, filterCourses);
 router.post("/enroll/:courseId", isUserAuthed, enrollCourseController);
-router.get("/enroll", isUserAuthed, userCoursesController);
+router.get("/reset",  resetuserController);
+router.post("/verify",  resetPasswordController);
+
 
 router.post(
   "/image",

@@ -65,3 +65,10 @@ model Admin {
   adminPassWord String
   adminEmail String
 }
+// we can store it in redis or in system 
+model UserOTP {
+  id             String       @id @default(cuid())
+  email          String
+  otp            String
+  expirationTime DateTime
+}

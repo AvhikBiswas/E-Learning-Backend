@@ -17,7 +17,6 @@ class User {
 
       return newUser;
     } catch (error) {
-      console.error("Error creating user:", error);
       return error;
     }
   }
@@ -77,6 +76,20 @@ class User {
         },
       });
       return updatedUser;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async updatepassbyEmail(useremail: string, newPassword: string) {
+    try {
+      const hasPass = await hashPassword(newPassword);
+      const updatedUser = await prismaClient.user.update({
+        where: { email: useremail },
+        data: {
+          password: hasPass,
+        },
+      });
     } catch (error) {
       return error;
     }

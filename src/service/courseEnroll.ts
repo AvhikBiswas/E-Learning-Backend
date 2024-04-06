@@ -1,32 +1,43 @@
+import { sendCourseEnrollmentNotification } from "../helper/emailSender";
 import Course from "../repository/course";
 import Enrollment from "../repository/enrollment";
+import User from "../repository/user";
 import { enrollementPayload } from "../types/enrollement";
+
+
 
 export const courseEnroll = async (enrollmentData: enrollementPayload) => {
   const enrollementRepository = new Enrollment();
   const courseRepository = new Course();
+  const userRepository = new User();
   try {
-    const isCoursePresent = await courseRepository.findCourseById(
+    const isCoursePresent: any = await courseRepository.findCourseById(
       enrollmentData.CourseId
     );
     if (!isCoursePresent) {
-      // we can check if the course is full or not,here we check presense of the course
-      throw new Error("Course Not Present");
+      throw new Error("Course not found");
     }
-    const Data = await enrollementRepository.userAlreadyEnrolled(
+
+    const userData: any = await userRepository.findUserById(
+      enrollmentData.userId
+    );
+
+    const isUserEnrolled: any = await enrollementRepository.userAlreadyEnrolled(
       enrollmentData
     );
-    if (Data) {
-      throw new Error("User Alreddy Present In Course");
+    if (isUserEnrolled) {
+      return -1;
     }
-    if (!Data) {
-      const enrolleUser = await enrollementRepository.userEnrollment(
-        enrollmentData
-      );
-      return enrolleUser;
-    }
-    return;
+
+    const enrolledUser = await enrollementRepository.userEnrollment(
+      enrollmentData
+    );
+    await sendCourseEnrollmentNotification(
+      userData.email,
+      isCoursePresent.title
+    );
+    return enrolledUser;
   } catch (error) {
-    throw new Error("Something Went Wrong");
+    throw new Error("Failed to enroll user in course: " + error);
   }
 };

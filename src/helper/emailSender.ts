@@ -7,7 +7,7 @@ export const sendRegistrationConfirmationEmail = async (
   name: string
 ) => {
   try {
-    return resend.emails.send({
+     resend.emails.send({
       from: "onboarding@resend.dev",
       to: email,
       subject: "Welcome to Our Application!",
@@ -49,22 +49,27 @@ export const sendPasswordResetEmail = async (email: string, OTP: string) => {
   });
 };
 
-export const sendCourseEnrollmentNotification = (
+export const sendCourseEnrollmentNotification = async(
   email: string,
   courseName: string
 ) => {
-  resend.emails.send({
-    from: "notifications@resend.dev",
-    to: email,
-    subject: "Course Enrollment Notification",
-    html: `
-    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-      <h2 style="color: #333; text-align: center;">Course Enrollment Notification</h2>
-      <p style="font-size: 16px; color: #555;">Hi,</p>
-      <p style="font-size: 16px; color: #555;">You have successfully enrolled in the course "${courseName}".</p>
-      <p style="font-size: 16px; color: #555;">Best regards,</p>
-      <p style="font-size: 16px; color: #555;">The Application Team</p>
-    </div>
-    `,
-  });
+try {
+  return await resend.emails.send({
+      from: "notifications@resend.dev",
+      to: email,
+      subject: "Course Enrollment Notification",
+      html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: #333; text-align: center;">Course Enrollment Notification</h2>
+        <p style="font-size: 16px; color: #555;">Hi,</p>
+        <p style="font-size: 16px; color: #555;">You have successfully enrolled in the course "${courseName}".</p>
+        <p style="font-size: 16px; color: #555;">Best regards,</p>
+        <p style="font-size: 16px; color: #555;">The Application Team</p>
+      </div>
+      `,
+    });
+} catch (error) {
+  return error;
+  
+}
 };

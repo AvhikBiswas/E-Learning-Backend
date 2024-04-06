@@ -1,22 +1,24 @@
-import express, { Router } from "express";
-import registerUser from "../../controller/Register";
-import getProfile from "../../controller/getProfile";
-import updateUser from "../../controller/updateUser";
-import filterCourses from "../../controller/filterCourses";
-import createCourse from "../../controller/createCourse";
-import signInUser from "../../controller/signInUser";
-import updateCourseController from "../../controller/updateCourse";
-import deleteCourseController from "../../controller/deleteCourseController";
-import createAdmin from "../../controller/createAdmin";
+import express,{ Router } from "express";
 import { isAdminAuthed } from "../../middleware/adminAuth";
 import { isUserAuthed } from "../../middleware/userAuth";
-import signInAdmin from "../../controller/adminLogin";
-import { imageUploadController } from "../../controller/userImage";
+import {
+  registerUser,
+  getProfile,
+  updateUser,
+  filterCourses,
+  createCourse,
+  signInUser,
+  updateCourseController,
+  deleteCourseController,
+  createAdmin,
+  signInAdmin,
+  imageUploadController,
+  enrollCourseController,
+  userCoursesController,
+  resetuserController,
+  resetPasswordController
+} from "../../controller";
 import upload from "../../middleware/multerUserImage";
-import { enrollCourseController } from "../../controller/enrolleController";
-import userCoursesController from "../../controller/userCourses";
-import resetuserController from "../../controller/resetPasswordController";
-import { resetPasswordController } from "../../controller/verfyUserOtpController";
 
 const router: Router = express.Router();
 

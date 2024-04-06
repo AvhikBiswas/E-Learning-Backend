@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import createCourseService from "../service/createCourse";
-import { CoursePayload } from "../types/Course";
+import { CoursePayload } from "../../types/Course";
+import createCourseService from "../../service/createCourse";
 
 const createCourse = async (req: Request, res: Response) => {
   const courseData: CoursePayload = req.body;

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import filterCourse from "../service/filterCourse";
+import filterCourse from "../../service/filterCourse";
+
 
 const filterCourses = async (req: Request, res: Response) => {
   try {

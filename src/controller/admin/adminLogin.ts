@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { UserPayload } from "../types/User";
-import UserRegister from "../service/UserRegister";
-import adminLogin from "../service/adminLogin";
+import adminLogin from "../../service/adminLogin";
+
 
 const signInAdmin = async (req: Request, res: Response) => {
   try {

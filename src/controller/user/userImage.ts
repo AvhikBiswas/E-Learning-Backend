@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { uploadImageToCloudinary } from "../service/userImageUpload";
-import cloudinary from "../config/cloudinaryConfig";
-import updateUserDetails from "../service/updateUserDetails";
+import updateUserDetails from "../../service/updateUserDetails";
+import cloudinary from "../../config/cloudinaryConfig";
+
 
 export const imageUploadController = async function (req: any, res: Response) {
   try {

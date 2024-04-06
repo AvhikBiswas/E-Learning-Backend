@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import getProfileData from "../service/getProfileData";
-import { ResetEmailOTP } from "../service/resetPassword";
+import getProfileData from "../../service/getProfileData";
+import { ResetEmailOTP } from "../../service/resetPassword";
+
 
 const resetuserController = async (req: Request, res: Response) => {
   try {

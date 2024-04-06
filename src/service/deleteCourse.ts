@@ -1,6 +1,6 @@
 import Course from "../repository/course";
 
-const updateCourse = async (courseId: string) => {
+const deeteCourseByID = async (courseId: string) => {
   const courseRepository = new Course();
 
   try {
@@ -15,4 +15,4 @@ const updateCourse = async (courseId: string) => {
   }
 };
 
-export default updateCourse;
+export default deeteCourseByID;

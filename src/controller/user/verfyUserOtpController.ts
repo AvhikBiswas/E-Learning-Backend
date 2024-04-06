@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { VerifyresetPassword } from "../service/verifyOtp";
+import { VerifyresetPassword } from "../../service/verifyOtp";
+
 
 export async function resetPasswordController(req: Request, res: Response) {
   try {

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import updateCourse from "../service/updateCourse";
-import { CourseUpdatePayload } from "../types/Course";
+import { CourseUpdatePayload } from "../../types/Course";
+import updateCourse from "../../service/updateCourse";
+
 
 const updateCourseController = async (req: Request, res: Response) => {
   const updateCourseData: CourseUpdatePayload = req.body;

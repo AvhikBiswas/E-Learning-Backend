@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import updateUserDetails from "../service/updateUserDetails";
-import { userUpdatePayload } from "../types/User";
+import { userUpdatePayload } from "../../types/User";
+import updateUserDetails from "../../service/updateUserDetails";
+
 
 const updateUser = async (req: Request, res: Response) => {
   try {

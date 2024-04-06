@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { UserPayload } from "../types/User";
-import UserRegister from "../service/UserRegister";
+import UserRegister from "../../service/UserRegister";
+import { UserPayload } from "../../types/User";
+
 
 const registerUser = async (req: Request, res: Response) => {
   try {

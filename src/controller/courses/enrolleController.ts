@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { courseEnroll } from "../service/courseEnroll";
-import { enrollementPayload } from "../types/enrollement";
+import { courseEnroll } from "../../service/courseEnroll";
 
 export const enrollCourseController = async (req: any, res: Response) => {
   const CourseId = req.params.courseId;

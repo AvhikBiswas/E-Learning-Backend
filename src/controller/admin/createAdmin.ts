@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { adminType } from "../types/admin";
-import createAdminAcc from "../service/createAdminAcc";
+import { adminType } from "../../types/admin";
+import createAdminAcc from "../../service/createAdminAcc";
+
 
 async function createAdmin(req: Request, res: Response) {
   const newAdminData: adminType = req.body;

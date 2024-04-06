@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import deleteCourse from "../service/deleteCourse";
+import deeteCourseByID from "../../service/deleteCourse";
 
 async function deleteCourseController(req: Request, res: Response) {
   const { courseId } = req.params;
 
   try {
-    const isDelete = await deleteCourse(courseId);
+    const isDelete = await deeteCourseByID(courseId);
     res.status(200).json({
       success: true,
       message: "Course deleted successfully",

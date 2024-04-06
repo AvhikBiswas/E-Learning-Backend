@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import getProfileData from "../service/getProfileData";
+import getProfileData from "../../service/getProfileData";
+
 
 const getProfile = async (req: any, res: Response) => {
   try {

@@ -1,5 +1,5 @@
 import { Response } from "express";
-import getUserCourses from "../service/getUserCourses";
+import getUserCourses from "../../service/getUserCourses";
 
 const userCoursesController = async (req: any, res: Response) => {
   try {

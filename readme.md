@@ -109,13 +109,17 @@ Multer middleware (upload) is used for handling file uploads.
 The API interacts with a database (PostgreSQL) using Prisma ORM.
 Ensure proper authentication and authorization mechanisms are implemented in the client application to access the protected endpoints.
 
+email notifiation example:
+we can modify it further and make it interactive
 
 email notification while user is register
 
+![Screenshot (39)](https://github.com/AvhikBiswas/E-Learning-Backend/assets/82642119/ff44df10-55cf-428f-8333-af7943e2594b)
 
 email for user reset password 
-
+![Screenshot (38)](https://github.com/AvhikBiswas/E-Learning-Backend/assets/82642119/9a7ffdc7-f916-4bdd-bead-b94550bbe5e1)
 
 email for new course purchase by user
+![Screenshot (37)](https://github.com/AvhikBiswas/E-Learning-Backend/assets/82642119/9673489c-9b9c-49b2-be42-37ae0e0f1afc)
 
 default Admin password is there in db.

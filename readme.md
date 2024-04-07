@@ -109,4 +109,13 @@ Multer middleware (upload) is used for handling file uploads.
 The API interacts with a database (PostgreSQL) using Prisma ORM.
 Ensure proper authentication and authorization mechanisms are implemented in the client application to access the protected endpoints.
 
+
+email notification while user is register
+
+
+email for user reset password 
+
+
+email for new course purchase by user
+
 default Admin password is there in db.
